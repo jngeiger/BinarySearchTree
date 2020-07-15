@@ -145,7 +145,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
             }
             else {
                 T replacement = _getMinOf(currentNode.rightChild);
-                delete(replacement);
+                deleteIteratively(replacement);
                 currentNode.setValue(replacement);
             }
         }
