@@ -107,12 +107,67 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
 
         return currentNode;
     }
+    public void deleteIteratively(T value)
+    {
+        BinaryNode<T> currentNode = root;
+        BinaryNode<T> parent = root;
+        while (currentNode != null && currentNode.getValue().compareTo(value) != 0)
+        {
+            parent = currentNode;
+            if (value.compareTo(currentNode.getValue()) < 0)
+                currentNode = currentNode.leftChild;
+            if (value.compareTo(currentNode.getValue()) >= 0 )
+                currentNode = currentNode.rightChild;
+        }
+        if (currentNode == null)
+            return;
+        else {
+            if (currentNode.leftChild == null && currentNode.rightChild == null)
+            {
+                if (parent.rightChild == currentNode)
+                    parent.rightChild = null;
+                else if(parent.leftChild == currentNode)
+                    parent.leftChild = null;
+            }
+            else if (currentNode.rightChild == null)
+            {
+                if (parent.rightChild == currentNode)
+                    parent.rightChild = currentNode.leftChild;
+                else if (parent.leftChild == currentNode)
+                    parent.leftChild = currentNode.leftChild;
+            }
+            else if(currentNode.leftChild == null)
+            {
+                if (parent.rightChild == currentNode)
+                    parent.rightChild = currentNode.rightChild;
+                else if (parent.leftChild == currentNode)
+                    parent.leftChild = currentNode.rightChild;
+            }
+            else {
+                T replacement = _getMinOf(currentNode.rightChild);
+                delete(replacement);
+                currentNode.setValue(replacement);
+
+            }
+
+        }
+    }
     private T _getMinOf(BinaryNode<T> currentNode)
     {
         if (currentNode.leftChild == null)
             return currentNode.getValue();
         else {
             return _getMinOf(currentNode.leftChild);
+        }
+    }
+    private void deleteMinNode(BinaryNode<T> currentNode)  //OPTIONAL
+    {
+        if (currentNode.leftChild.leftChild == null) {
+            currentNode.leftChild = currentNode.leftChild.rightChild;
+            return;
+        }
+        else {
+            deleteMinNode(currentNode.leftChild);
         }
     }
     public String toString()

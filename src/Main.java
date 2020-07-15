@@ -25,7 +25,7 @@ public class Main {
 
 
         System.out.println(tree);
-        tree.delete(6);
+        tree.deleteIteratively(6);
         System.out.println(tree);
 
 
