@@ -116,7 +116,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
             parent = currentNode;
             if (value.compareTo(currentNode.getValue()) < 0)
                 currentNode = currentNode.leftChild;
-            if (value.compareTo(currentNode.getValue()) >= 0 )
+            else if (value.compareTo(currentNode.getValue()) >= 0 )
                 currentNode = currentNode.rightChild;
         }
         if (currentNode == null)
@@ -147,9 +147,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
                 T replacement = _getMinOf(currentNode.rightChild);
                 delete(replacement);
                 currentNode.setValue(replacement);
-
             }
-
         }
     }
     private T _getMinOf(BinaryNode<T> currentNode)
@@ -158,16 +156,6 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
             return currentNode.getValue();
         else {
             return _getMinOf(currentNode.leftChild);
-        }
-    }
-    private void deleteMinNode(BinaryNode<T> currentNode)  //OPTIONAL
-    {
-        if (currentNode.leftChild.leftChild == null) {
-            currentNode.leftChild = currentNode.leftChild.rightChild;
-            return;
-        }
-        else {
-            deleteMinNode(currentNode.leftChild);
         }
     }
     public String toString()
