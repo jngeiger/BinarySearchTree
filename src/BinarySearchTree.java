@@ -116,7 +116,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
             parent = currentNode;
             if (value.compareTo(currentNode.getValue()) < 0)
                 currentNode = currentNode.leftChild;
-            else if (value.compareTo(currentNode.getValue()) >= 0 )
+            else if (value.compareTo(currentNode.getValue()) > 0 )
                 currentNode = currentNode.rightChild;
         }
         if (currentNode == null)
